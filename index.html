@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="forum.css">
+    <title></title>
+</head>
+    <body>
+        <div class="top-bar">
+            <h1>
+                My Forum
+            </h1>
+        </div>
+        <div class="main">
+        <ul style="list-style-type:none">
+        </ul>
+        </div>
+        <script src="postdb.js"></script>
+        <script>
+            console.log(posts);
+            var container = document.querySelector('ul');
+            for (let post of posts) {
+                var html = `
+                <li class="row">
+                    <a href="forum.html?${post.id}">
+                        <h4 class="title">
+                            ${post.title}
+                        </h4>
+                        <div class="bottom">
+                            <p class="timestamp">
+                                ${new Date(post.date).toLocaleString()}
+                            </p>
+                            <p class="comment-count">
+                                ${post.comments.length} comments
+                            </p>
+                        </div>
+                    </a>
+                </li>
+                <a href="post.html?${post.id}"><button>add post</button></a>
+                `
+                container.insertAdjacentHTML('beforeend', html);
+            }
+        </script>
+    </body>
+</html>

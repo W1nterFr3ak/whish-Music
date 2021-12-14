@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="forum.css">
+    <title>Winters Test</title>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>
+            My Forum
+        </h1>
+    </div>
+    <div class="main">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <form method="post" role="form">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="title" placeholder="Blog Title"/>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control bcontent" name="content"></textarea>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary form-control" > Post</button>
+                </div>
+                <div>
+                    <a href="index.html">back</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+   
+    </div>
+    <script src="postdb.js"></script>
+    <script>
+        var id = window.location.search.slice(1);
+        var post = posts.find(t => t.id == id);
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            var txt = document.querySelector('textarea');
+            var title = document.querySelector('input[name="title"]');
+            let lastpost = posts[posts.length-1];
+            var postit =  {
+                        id: lastpost.id + 1,
+                        title: title.value,
+                        author: post.author,
+                        date: Date.now(),
+                        content: txt.value,
+                        comments: []
+                    };
+           
+        
+            txt.value = '';
+            title.value ='';
+            posts.push(postit);
+            localStorage.setItem('posts', JSON.stringify(posts));
+        })
+    </script>
+    
+</body>
+</html>
